@@ -13,14 +13,16 @@ defmodule Askwer.Router do
     plug :accepts, ["json"]
   end
 
+  # Other scopes may use custom stacks.
+  scope "/api", Askwer do
+    pipe_through :api
+
+    resources "/users", UserController, except: [:new, :edit]
+  end
+
   scope "/", Askwer do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", Askwer do
-  #   pipe_through :api
-  # end
 end
