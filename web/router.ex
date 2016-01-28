@@ -17,7 +17,7 @@ defmodule Askwer.Router do
   scope "/api", Askwer do
     pipe_through :api
 
-    resources "/users", UserController, except: [:new, :edit]
+    post "/registration", RegistrationController, :create
   end
 
   scope "/", Askwer do
