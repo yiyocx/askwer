@@ -11,6 +11,8 @@ defmodule Askwer.User do
     timestamps
   end
 
+  @derive {Poison.Enconder, only: [:id, :name, :email]}
+
   @required_fields ~w(name email password password_confirmation)
   @optional_fields ~w(crypted_password)
 
