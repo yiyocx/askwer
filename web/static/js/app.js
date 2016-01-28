@@ -22,14 +22,6 @@ import "phoenix_html"
 
 import React from "react";
 import ReactDOM from "react-dom";
+import routes from './routes';
 
-class HelloWorld extends React.Component {
-  render() {    
-    return (<h1>Hello world</h1>);
-  }
-}
-
-ReactDOM.render(
-  <HelloWorld />,
-  document.getElementsByTagName('main')[0]
-)
+ReactDOM.render(routes, document.getElementsByTagName('main')[0]);
