@@ -23,5 +23,19 @@ defmodule Askwer.User do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
+    |> unique_constraint(:email, message: "email already taken")
+    |> validate_format(:email, ~r/@/)
+    |> validate_length(:password, min: 6)
+    |> validate_confirmation(:password_confirmation, message: "password does not match")
+    |> generate_encrypted_model
+  end
+
+  defp generate_encrypted_model(changeset) do
+    case changeset do
+      %Ecto.Changeset{valid?: true, changes: %{password: password}} ->
+        put_change(changeset, :crypted_password, Comeonin.Bcrypt.hashpwsalt(password))
+      _ ->
+        changeset
+    end
   end
 end
