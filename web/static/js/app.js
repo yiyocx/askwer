@@ -22,6 +22,9 @@ import "phoenix_html"
 
 import React from "react";
 import ReactDOM from "react-dom";
-import routes from './routes';
+import Root from './containers/root';
+import configureStore from './store/store'
 
-ReactDOM.render(routes, document.getElementsByTagName('main')[0]);
+const store = configureStore();
+
+ReactDOM.render(<Root store={store} />, document.getElementById('main_container'));

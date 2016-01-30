@@ -1,9 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
 
 let SignUp = React.createClass({
   _handleSubmit: function(e) {
     e.preventDefault();
+
+    const { dispatch } = this.props;
 
     const data = {
       name: this.refs.name.value,
@@ -12,7 +15,10 @@ let SignUp = React.createClass({
       password_confirmation: this.refs.password_confirmation.value
     };
 
-    console.log(data);
+    dispatch({
+      type: 'REGISTER_USER',
+      errors: 'Hola soy un error de prueba',
+    });
   },
 
   render: function() {
@@ -41,4 +47,8 @@ let SignUp = React.createClass({
   }
 });
 
-export default SignUp;
+const mapStateToProps = (state) => ({
+  errors: state.errors,
+});
+
+export default connect(mapStateToProps)(SignUp);
