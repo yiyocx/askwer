@@ -15,10 +15,10 @@ defmodule Askwer.RegistrationController do
 
     case Repo.insert(changeset) do
       {:ok, user} ->
-        {:ok, jwt, _full_claims} = Guardian.enconde_and_sign(user, :token)
+        { :ok, jwt, full_claims } = Guardian.encode_and_sign(user, :token)
         conn
         |> put_status(:created)
-        |> render(Askwer.SessionView, "show.json", jwt: jwt, user: user)
+        |> render(Askwer.UserView, "show.json", jwt: jwt, user: user)
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import Actions from '../actions/registration';
 
 let SignUp = React.createClass({
   _handleSubmit: function(e) {
@@ -15,10 +16,7 @@ let SignUp = React.createClass({
       password_confirmation: this.refs.password_confirmation.value
     };
 
-    dispatch({
-      type: 'REGISTER_USER',
-      errors: 'Hola soy un error de prueba',
-    });
+    dispatch(Actions.signUp(data));
   },
 
   render: function() {
