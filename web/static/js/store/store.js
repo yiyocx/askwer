@@ -4,7 +4,10 @@ import createLogger from 'redux-logger';
 
 import registration from '../reducers/registration';
 
-const loggerMiddleware = createLogger();
+const loggerMiddleware = createLogger({
+  level: 'info',
+  collapsed: true,
+});
 
 export default function configureStore() {
   let createStoreWithMiddleware = applyMiddleware(

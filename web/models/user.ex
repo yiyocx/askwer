@@ -28,7 +28,7 @@ defmodule Askwer.User do
     |> unique_constraint(:email, message: "email already taken")
     |> validate_format(:email, ~r/@/)
     |> validate_length(:password, min: 6)
-    |> validate_confirmation(:password_confirmation, message: "password does not match")
+    |> validate_confirmation(:password, message: "password does not match")
     |> generate_encrypted_model
   end
 
