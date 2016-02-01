@@ -22,7 +22,7 @@ defmodule Askwer.RegistrationController do
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)
-        |> render(Askwer.ChangesetView, "error.json", changeset: changeset)
+        |> render(Askwer.RegistrationView, "error.json", changeset: changeset)
     end
   end
 

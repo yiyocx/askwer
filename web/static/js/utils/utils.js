@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import React        from 'react';
 
 // Headers needed for every json request made from the client side
 const defaultHeaders = {
@@ -23,3 +24,19 @@ export function httpPost(url, data) {
     .then(checkStatus)
     .then((response) => response.json());
 };
+
+// Render the errors related to a ref of some React component
+// for example a form
+export function renderErrors(errors, ref) {
+  if (!errors) return false;
+
+  return errors.map((error, i) => {
+    if (error[ref]) {
+      return (
+        <div key={i}>
+          {error[ref]}
+        </div>
+      );
+    }
+  });
+}
