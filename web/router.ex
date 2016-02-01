@@ -11,6 +11,8 @@ defmodule Askwer.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug Guardian.Plug.VerifyHeader
+    plug Guardian.Plug.LoadResource
   end
 
   # Other scopes may use custom stacks.
@@ -18,6 +20,8 @@ defmodule Askwer.Router do
     pipe_through :api
 
     post "/registration", RegistrationController, :create
+    post "/session", SessionController, :create
+    delete "/session", SessionController, :delete
   end
 
   scope "/", Askwer do

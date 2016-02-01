@@ -1,4 +1,6 @@
 defmodule Askwer.Session do
+  alias Askwer.{Repo, User}
+
   def authenticate(%{"email" => email, "password" => password}) do
     user = Repo.get_by(User, email: String.downcase(email))
 

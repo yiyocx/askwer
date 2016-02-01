@@ -13,7 +13,7 @@ defmodule Askwer.SessionController do
       :error ->
         conn
         |> put_status(:unprocessable_entity)
-        |> render(Askwer.RegistrationView, "error.json")
+        |> render(Askwer.SessionView, "error.json")
     end
   end
 end
