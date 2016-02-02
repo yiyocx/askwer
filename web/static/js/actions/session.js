@@ -8,7 +8,19 @@ const sessionActions = {
         password: password,
       }};
       httpPost('/api/session', data)
-    }
+      .then((data) => {
+        localStorage.setItem('phoenixAuthToken', data.jwt);
+      })
+      .catch((error) => {
+        error.response.json()
+        .then((errorJson) => {
+          dispatch({
+            type: 'SESSION_ERROR',
+            error: errorJson.error,
+          });
+        });
+      });
+    };
   },
 
 };

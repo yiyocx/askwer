@@ -12,11 +12,24 @@ const Login = React.createClass({
     dispatch(sessionActions.login(email.value, password.value));
   },
 
+  _renderError: function() {
+    const { error } = this.props;
+
+    if (!error) return false;
+
+    return (
+      <div>
+        {error}
+      </div>
+    );
+  },
+
   render: function() {
     return (
       <div>
         <main>
           <form onSubmit={this._handleSubmit}>
+            {this._renderError()}
             <div >
               <input ref="email" type="Email" placeholder="Email" required="true"/>
             </div>
@@ -31,4 +44,8 @@ const Login = React.createClass({
   }
 });
 
-export default connect()(Login);
+const mapStateToProps = (state) => (
+  state.session
+);
+
+export default connect(mapStateToProps)(Login);
