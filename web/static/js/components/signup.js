@@ -53,7 +53,7 @@ let SignUp = React.createClass({
 });
 
 const mapStateToProps = (state) => ({
-  errors: state.errors,
+  errors: state.registration.errors,
 });
 
 export default connect(mapStateToProps)(SignUp);

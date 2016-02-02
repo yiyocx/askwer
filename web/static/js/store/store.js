@@ -2,7 +2,7 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 
-import registration from '../reducers/registration';
+import allReducers from '../reducers/allReducers';
 
 const loggerMiddleware = createLogger({
   level: 'info',
@@ -12,5 +12,5 @@ const loggerMiddleware = createLogger({
 export default function configureStore() {
   let createStoreWithMiddleware = applyMiddleware(
     thunk, loggerMiddleware)(createStore);
-  return createStoreWithMiddleware(registration);
+  return createStoreWithMiddleware(allReducers);
 }

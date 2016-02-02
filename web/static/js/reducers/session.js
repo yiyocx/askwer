@@ -1,11 +1,11 @@
 const initialState = {
-  errors: null,
-};
+  error: null,
+}
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case 'REGISTRATION_ERROR':
-      return Object.assign({}, state, {errors: action.errors});
+    case 'SESSION_ERROR':
+      return Object.assign({}, state, {error: action.error});
     default:
       return state;
   }
