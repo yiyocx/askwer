@@ -40,3 +40,7 @@ export function renderErrors(errors, ref) {
     }
   });
 }
+
+export function setDocumentTitle(title) {
+  document.title = `${title} | Askwer`;
+}

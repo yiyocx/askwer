@@ -2,9 +2,13 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import Actions from '../actions/registration';
-import { renderErrors } from '../utils/utils';
+import { renderErrors, setDocumentTitle } from '../utils/utils';
 
 let SignUp = React.createClass({
+  componentDidMount: function() {
+    setDocumentTitle('Register');
+  },
+
   _handleSubmit: function(e) {
     e.preventDefault();
 

@@ -1,8 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { setDocumentTitle } from '../utils/utils';
 import sessionActions from '../actions/session';
 
 const Login = React.createClass({
+  componentDidMount: function() {
+    setDocumentTitle('Login');
+  },
+
   _handleSubmit: function(e) {
     e.preventDefault();
 
