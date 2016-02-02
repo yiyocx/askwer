@@ -6,10 +6,10 @@ defmodule Askwer.SessionController do
   def create(conn, %{"session" => session_params}) do
     case Askwer.Session.authenticate(session_params) do
       {:ok, user} ->
-        Guardian.Plug.sign_in(conn, user)
+        {:ok, jwt, _full_claims} = Guardian.encode_and_sign(user, :token)
         conn
         |> put_status(:created)
-        |> render(Askwer.RegistrationView, "show.json", user: user)
+        |> render(Askwer.UserView, "show.json", user: user, jwt: jwt)
       :error ->
         conn
         |> put_status(:unprocessable_entity)
