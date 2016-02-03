@@ -1,4 +1,4 @@
-import { httpPost, httpGet } from '../utils/utils';
+import { httpPost, httpGet, httpDelete } from '../utils/utils';
 
 const sessionActions = {
   login: function(email, password) {
@@ -36,6 +36,20 @@ const sessionActions = {
     };
   },
 
+  logout: function() {
+    return dispatch => {
+      httpDelete('api/session')
+      .then((data) => {
+        localStorage.removeItem('phoenixAuthToken');
+        dispatch({
+          type: 'USER_LOGOUT',
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    };
+  },
 };
 
 function setCurrentUser(dispatch, user) {

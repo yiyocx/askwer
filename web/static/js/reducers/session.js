@@ -12,6 +12,8 @@ export default function reducer(state = initialState, action = {}) {
       });
     case 'SESSION_ERROR':
       return Object.assign({}, state, {error: action.error});
+    case 'USER_LOGOUT':
+      return initialState;
     default:
       return state;
   }

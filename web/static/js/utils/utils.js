@@ -36,6 +36,12 @@ export function httpGet(url) {
     .then((response) => response.json());
 };
 
+export function httpDelete(url) {
+  return fetch(url, {method: 'delete', headers: buildHeaders()})
+    .then(checkStatus)
+    .then((response) => response.json());
+};
+
 // Render the errors related to a ref of some React component
 // for example a form
 export function renderErrors(errors, ref) {
