@@ -7,6 +7,11 @@ const defaultHeaders = {
   'Content-Type': 'application/json',
 }
 
+function buildHeaders() {
+  let authToken = localStorage.getItem('phoenixAuthToken');
+  return Object.assign(defaultHeaders, {Authorization: authToken});
+}
+
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
@@ -21,6 +26,12 @@ export function httpPost(url, data) {
   const body = JSON.stringify(data);
 
   return fetch(url, {method: 'post', headers: defaultHeaders, body: body})
+    .then(checkStatus)
+    .then((response) => response.json());
+};
+
+export function httpGet(url) {
+  return fetch(url, {method: 'get', headers: buildHeaders()})
     .then(checkStatus)
     .then((response) => response.json());
 };

@@ -9,11 +9,11 @@ defmodule Askwer.UserView do
     %{jwt: jwt, user: user}
   end
 
-  def render("user.json", %{user: user, jwt: jwt}) do
-    %{id: user.id,
+  def render("user.json", %{user: user}) do
+    %{
+      id: user.id,
       name: user.name,
       email: user.email,
-      crypted_password: user.crypted_password
      }
   end
 end

@@ -1,4 +1,4 @@
-import { httpPost } from '../utils/utils';
+import { httpPost, httpGet } from '../utils/utils';
 
 const sessionActions = {
   login: function(email, password) {
@@ -20,6 +20,18 @@ const sessionActions = {
             error: errorJson.error,
           });
         });
+      });
+    };
+  },
+
+  currentUser: function() {
+    return dispatch => {
+      httpGet('/api/current_user')
+      .then((data) => {
+        setCurrentUser(dispatch, data);
+      })
+      .catch((error) => {
+        console.log(error);
       });
     };
   },

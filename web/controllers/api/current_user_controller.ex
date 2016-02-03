@@ -9,7 +9,7 @@ defmodule Askwer.CurrentUserController do
         user = Guardian.Plug.current_resource(conn)
         conn
         |> put_status(:ok)
-        |> render("show.json", user: user)
+        |> render(Askwer.UserView ,"user.json", user: user)
       {:error, _reason} ->
         conn
         |> put_status(:not_found)
