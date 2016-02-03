@@ -10,10 +10,16 @@ defmodule Askwer.SessionController do
         conn
         |> put_status(:created)
         |> render(Askwer.UserView, "show.json", user: user, jwt: jwt)
-      :error ->
+      {:error, message} ->
         conn
         |> put_status(:unprocessable_entity)
-        |> render(Askwer.SessionView, "error.json")
+        |> render(Askwer.SessionView, "error.json", error: message)
     end
+  end
+
+  def unauthenticated(conn, _params) do
+    conn
+    |> put_status(:forbidden)
+    |> render(Askwer.SessionView, "forbidden.json", error: "Not Authenticated")
   end
 end

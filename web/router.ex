@@ -22,6 +22,7 @@ defmodule Askwer.Router do
     post "/registration", RegistrationController, :create
     post "/session", SessionController, :create
     delete "/session", SessionController, :delete
+    get "/current_user", CurrentUserController, :show
   end
 
   scope "/", Askwer do

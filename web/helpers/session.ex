@@ -6,7 +6,7 @@ defmodule Askwer.Session do
 
     case check_password(user, password) do
       true -> {:ok, user}
-      _ -> :error
+      _ -> {:error, "Invalid email or password"}
     end
   end
 
