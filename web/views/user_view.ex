@@ -6,15 +6,14 @@ defmodule Askwer.UserView do
   end
 
   def render("show.json", %{user: user, jwt: jwt}) do
-    %{data: render_one(user, Askwer.UserView, "user.json", jwt: jwt)}
+    %{jwt: jwt, user: user}
   end
 
   def render("user.json", %{user: user, jwt: jwt}) do
     %{id: user.id,
       name: user.name,
       email: user.email,
-      crypted_password: user.crypted_password,
-      jwt: jwt
+      crypted_password: user.crypted_password
      }
   end
 end

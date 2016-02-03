@@ -6,7 +6,7 @@ defmodule Askwer.SessionController do
   def create(conn, %{"session" => session_params}) do
     case Askwer.Session.authenticate(session_params) do
       {:ok, user} ->
-        {:ok, jwt, _full_claims} = Guardian.encode_and_sign(user, :token)
+        {:ok, jwt, _full_claims} = user |> Guardian.encode_and_sign(:token)
         conn
         |> put_status(:created)
         |> render(Askwer.UserView, "show.json", user: user, jwt: jwt)

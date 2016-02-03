@@ -10,6 +10,7 @@ const sessionActions = {
       httpPost('/api/session', data)
       .then((data) => {
         localStorage.setItem('phoenixAuthToken', data.jwt);
+        setCurrentUser(dispatch, data.user);
       })
       .catch((error) => {
         error.response.json()
@@ -23,6 +24,13 @@ const sessionActions = {
     };
   },
 
+};
+
+function setCurrentUser(dispatch, user) {
+  dispatch({
+    type: 'CURRENT_USER',
+    currentUser: user,
+  });
 };
 
 export default sessionActions;

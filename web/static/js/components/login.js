@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import { setDocumentTitle } from '../utils/utils';
 import sessionActions from '../actions/session';
 
@@ -43,6 +44,7 @@ const Login = React.createClass({
             </div>
             <button type="submit">Login</button>
           </form>
+          <Link to="/register">Create account</Link>
         </main>
       </div>
     );

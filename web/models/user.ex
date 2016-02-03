@@ -1,6 +1,8 @@
 defmodule Askwer.User do
   use Askwer.Web, :model
 
+  @derive {Poison.Encoder, only: [:id, :name, :email]}
+
   schema "users" do
     field :name, :string
     field :email, :string
@@ -10,8 +12,6 @@ defmodule Askwer.User do
 
     timestamps
   end
-
-  @derive {Poison.Enconder, only: [:id, :name, :email]}
 
   @required_fields ~w(name email password password_confirmation)
   @optional_fields ~w(crypted_password)
