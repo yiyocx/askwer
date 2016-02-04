@@ -32,15 +32,44 @@ const Header = React.createClass({
 
   render: function() {
     return (
-      <header>
-        <nav>
-          <div>
-            <ul>
-              <li><a href="#">Inicio</a></li>
-              <li> {this._renderCurrentUser()} </li>
-              <li> {this._renderSignOutLink()} </li>
-            </ul>
-          </div>
+      <header>        
+        <nav className="navbar navbar-default">
+          <div className="container-fluid">
+            <div className="navbar-header">
+              <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span className="sr-only">Toggle navigation</span>
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+              </button>
+              <a className="navbar-brand" href="#">Askwer</a>
+            </div>
+
+            <div className="collapse navbar-collapse">
+              {/* Search input */}
+              <form className="navbar-form navbar-left" role="search">
+                <div className="form-group">
+                  <input type="text" className="form-control" placeholder="Ask or Search Askwer" />
+                </div>
+                <button type="submit" className="btn btn-default">Submit</button>
+              </form>
+
+              {/* Options of navigation bar with dropdown*/}
+              <ul className="nav navbar-nav navbar-right">
+                <li className="active"><a href="#">Read</a></li>
+                <li><a href="#">Answer</a></li>
+                <li><a href="#">Notifications</a></li>
+                <li className="dropdown">
+                  <a href="#" className="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {this._renderCurrentUser()}
+                  </a>
+                  <ul className="dropdown-menu">
+                    <li> {this._renderSignOutLink()} </li>
+                  </ul>
+                </li>
+              </ul>
+            </div> {/* navbar-collapse */}
+          </div> {/* container-fluid */}
         </nav>
       </header>
     );
