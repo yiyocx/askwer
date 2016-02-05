@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { routeActions } from 'react-router-redux';
 
 import sessionActions from '../actions/session';
 import Header from '../components/header';
@@ -12,7 +13,7 @@ const AuthenticatedContainer = React.createClass({
     if (phoenixAuthToken && !currentUser) {
       dispatch(sessionActions.currentUser());
     } else if (!phoenixAuthToken) {
-      console.log("No tengo el token");
+      dispatch(routeActions.push('/login'));
     }
   },
 

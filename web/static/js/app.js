@@ -22,9 +22,11 @@ import "phoenix_html"
 
 import React from "react";
 import ReactDOM from "react-dom";
+import { browserHistory } from 'react-router';
 import Root from './containers/root';
 import configureStore from './store/store'
 
-const store = configureStore();
+const store = configureStore(browserHistory);
 
-ReactDOM.render(<Root store={store} />, document.getElementById('main_container'));
+ReactDOM.render(<Root routerHistory={browserHistory} store={store} />,
+  document.getElementById('main_container'));

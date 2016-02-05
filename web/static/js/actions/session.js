@@ -1,3 +1,4 @@
+import { routeActions } from 'react-router-redux';
 import { httpPost, httpGet, httpDelete } from '../utils/utils';
 
 const sessionActions = {
@@ -11,6 +12,7 @@ const sessionActions = {
       .then((data) => {
         localStorage.setItem('phoenixAuthToken', data.jwt);
         setCurrentUser(dispatch, data.user);
+        dispatch(routeActions.push("/"));
       })
       .catch((error) => {
         error.response.json()
@@ -44,6 +46,7 @@ const sessionActions = {
         dispatch({
           type: 'USER_LOGOUT',
         });
+        dispatch(routeActions.push("/login"));
       })
       .catch((error) => {
         console.log(error);
