@@ -14,6 +14,8 @@ export default function reducer(state = initialState, action = {}) {
       return Object.assign({}, state, {error: action.error});
     case 'USER_LOGOUT':
       return initialState;
+    case 'SOCKET_CONNECTED':
+      return Object.assign(state, {socket: action.socket, channel: action.channel});
     default:
       return state;
   }

@@ -1,5 +1,6 @@
 import { routeActions } from 'react-router-redux';
 import { httpPost, httpGet, httpDelete } from '../utils/utils';
+import { Socket } from "phoenix";
 
 const sessionActions = {
   login: function(email, password) {
@@ -59,6 +60,22 @@ function setCurrentUser(dispatch, user) {
   dispatch({
     type: 'CURRENT_USER',
     currentUser: user,
+  });
+
+  const socket = new Socket('/socket', {
+    params: { token: localStorage.getItem('phoenixAuthToken')},
+  });
+
+  socket.connect();
+
+  const channel = socket.channel(`users:${user.id}`);
+
+  channel.join().receive('ok', () => {
+    dispatch({
+      type: 'SOCKET_CONNECTED',
+      socket: socket,
+      channel: channel,
+    });
   });
 };
 

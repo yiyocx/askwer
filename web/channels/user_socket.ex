@@ -1,12 +1,14 @@
 defmodule Askwer.UserSocket do
   use Phoenix.Socket
 
+  alias Askwer.GuardianSerializer
+
   ## Channels
-  # channel "rooms:*", Askwer.RoomChannel
+  channel "users:*", Askwer.UserChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
-  # transport :longpoll, Phoenix.Transports.LongPoll
+  transport :longpoll, Phoenix.Transports.LongPoll
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After
@@ -19,9 +21,19 @@ defmodule Askwer.UserSocket do
   #
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
-  def connect(_params, socket) do
-    {:ok, socket}
+  def connect(%{"token" => token}, socket) do
+    case Guardian.decode_and_verify(token) do
+      {:ok, claims} ->
+        case GuardianSerializer.from_token(claims["sub"]) do
+          {:ok, user} ->
+            {:ok, assign(socket, :current_user, user)}
+          {:error, _reason} ->
+            :error
+        end
+    end
   end
+
+  def connect(_params, _socket), do: :error
 
   # Socket id's are topics that allow you to identify all sockets for a given user:
   #
@@ -33,5 +45,5 @@ defmodule Askwer.UserSocket do
   #     Askwer.Endpoint.broadcast("users_socket:#{user.id}", "disconnect", %{})
   #
   # Returning `nil` makes this socket anonymous.
-  def id(_socket), do: nil
+  def id(socket), do: "users_socket:#{socket.assigns.current_user.id}"
 end
